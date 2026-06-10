@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/task.dart';
 import '../services/notification_service.dart';
+import '../main.dart'; // To access globalScaffoldMessengerKey
 
 class TaskCategory {
   final String name;
@@ -40,6 +41,16 @@ class TaskProvider with ChangeNotifier {
   final SupabaseClient _client = Supabase.instance.client;
   User? _currentUser;
   bool _isLoading = false;
+
+  void _showNetworkError() {
+    globalScaffoldMessengerKey.currentState?.showSnackBar(
+      const SnackBar(
+        content: Text('Network error: Operating in offline mode. Changes saved locally.'),
+        backgroundColor: Colors.orange,
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
 
   // Master categories definitions
   final List<TaskCategory> _categories = [
@@ -686,6 +697,7 @@ class TaskProvider with ChangeNotifier {
         }
       } catch (e) {
         debugPrint('Error inserting task to Supabase: $e');
+        _showNetworkError();
       }
     }
   }
@@ -736,6 +748,7 @@ class TaskProvider with ChangeNotifier {
           await _syncStats();
         } catch (e) {
           debugPrint('Error updating task completion in Supabase: $e');
+          _showNetworkError();
         }
       }
     }
@@ -771,6 +784,7 @@ class TaskProvider with ChangeNotifier {
           await _syncStats();
         } catch (e) {
           debugPrint('Error deleting task from Supabase: $e');
+          _showNetworkError();
         }
       }
     }
