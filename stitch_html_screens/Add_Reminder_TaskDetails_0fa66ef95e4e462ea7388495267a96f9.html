@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Nova - Add Reminder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#004395",
+                        "secondary-container": "#03b5d3",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#2c0051",
+                        "surface-bright": "#3a3939",
+                        "surface-dim": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#ddb7ff",
+                        "surface": "#131313",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#acedff",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#4d4354",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "surface-container": "#201f1f",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#001a42",
+                        "outline": "#988d9f",
+                        "error-container": "#93000a",
+                        "primary-container": "#b76dff",
+                        "on-secondary-container": "#00424e",
+                        "background": "#131313",
+                        "on-secondary-fixed": "#001f26",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed": "#f0dbff",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#4cd7f6",
+                        "primary-fixed-dim": "#ddb7ff",
+                        "primary": "#ddb7ff",
+                        "on-tertiary-container": "#00285d",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "on-surface-variant": "#cfc2d6",
+                        "tertiary-container": "#4d8eff",
+                        "on-primary-fixed-variant": "#6900b3",
+                        "on-secondary": "#003640",
+                        "on-primary-container": "#400071",
+                        "inverse-primary": "#842bd2",
+                        "on-primary": "#490080",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-error": "#690005",
+                        "on-tertiary": "#002e6a",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary": "#adc6ff",
+                        "tertiary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter-mobile": "16px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            color: #e5e2e1;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .glass-panel {
+            background-color: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .neon-bloom-primary {
+            box-shadow: 0 0 20px rgba(221, 183, 255, 0.3);
+        }
+
+        .neon-bloom-secondary {
+            box-shadow: 0 0 16px rgba(76, 215, 246, 0.3);
+        }
+
+        .neon-bloom-error {
+            box-shadow: 0 0 16px rgba(255, 180, 171, 0.3);
+        }
+
+        .input-underline {
+            position: relative;
+        }
+        
+        .input-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .input-underline:focus-within::after {
+            height: 2px;
+            background: linear-gradient(90deg, #4cd7f6, #ddb7ff);
+            box-shadow: 0 0 8px rgba(221, 183, 255, 0.5);
+        }
+
+        /* Hide scrollbar for horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #ddb7ff;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #ddb7ff;
+            box-shadow: 0 0 12px rgba(221, 183, 255, 0.4);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col overflow-x-hidden relative">
+<!-- Top App Bar (Suppressed Navbar shell for focused task, but keeping header) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/80 backdrop-blur-xl border-b border-white/5">
+<button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">close</span>
+</button>
+<span class="font-title-md text-title-md text-on-surface tracking-wide">New Reminder</span>
+<div class="w-6"></div> <!-- Spacer for balance -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 pt-24 pb-32 px-margin-mobile flex flex-col gap-xl">
+<!-- Title Input -->
+<section class="input-underline pb-sm">
+<input class="w-full bg-transparent border-none focus:ring-0 font-headline-lg-mobile text-headline-lg-mobile text-on-surface placeholder:text-on-surface-variant/40 p-0" placeholder="What needs to be done?" type="text"/>
+</section>
+<!-- Date & Time Row -->
+<section class="flex gap-md">
+<button class="flex-1 glass-panel rounded-xl p-md flex flex-col items-start gap-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 0, 'wght' 200;">calendar_today</span>
+<div class="flex flex-col items-start">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Date</span>
+<span class="font-body-lg text-body-lg text-on-surface">Today</span>
+</div>
+</button>
+<button class="flex-1 glass-panel rounded-xl p-md flex flex-col items-start gap-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0, 'wght' 200;">schedule</span>
+<div class="flex flex-col items-start">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Time</span>
+<span class="font-body-lg text-body-lg text-on-surface">09:00 PM</span>
+</div>
+</button>
+</section>
+<!-- Priority Picker -->
+<section class="flex flex-col gap-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest pl-xs">Priority Level</span>
+<div class="grid grid-cols-4 gap-sm">
+<button class="glass-panel rounded-lg py-sm text-center font-body-lg text-body-lg text-on-surface-variant hover:text-on-surface transition-colors">Low</button>
+<button class="glass-panel rounded-lg py-sm text-center font-body-lg text-body-lg text-on-surface-variant hover:text-on-surface transition-colors">Med</button>
+<button class="bg-primary/20 border border-primary/50 rounded-lg py-sm text-center font-body-lg text-body-lg text-primary neon-bloom-primary">High</button>
+<button class="glass-panel rounded-lg py-sm text-center font-body-lg text-body-lg text-error/70 hover:text-error transition-colors">Urgent</button>
+</div>
+</section>
+<!-- Category Grid -->
+<section class="flex flex-col gap-md">
+<div class="flex justify-between items-end pl-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Category</span>
+<span class="font-label-sm text-label-sm text-primary cursor-pointer hover:opacity-80">Edit</span>
+</div>
+<div class="grid grid-cols-4 gap-md">
+<button class="flex flex-col items-center gap-xs group">
+<div class="w-14 h-14 rounded-full glass-panel flex items-center justify-center group-hover:border-secondary transition-colors">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 0, 'wght' 200;">work</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Work</span>
+</button>
+<button class="flex flex-col items-center gap-xs group">
+<div class="w-14 h-14 rounded-full glass-panel flex items-center justify-center border-primary bg-primary/10 neon-bloom-primary">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1, 'wght' 300;">menu_book</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Study</span>
+</button>
+<button class="flex flex-col items-center gap-xs group">
+<div class="w-14 h-14 rounded-full glass-panel flex items-center justify-center group-hover:border-[#ffb4ab] transition-colors">
+<span class="material-symbols-outlined text-[#ffb4ab]" style="font-variation-settings: 'FILL' 0, 'wght' 200;">favorite</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Health</span>
+</button>
+<button class="flex flex-col items-center gap-xs group">
+<div class="w-14 h-14 rounded-full glass-panel flex items-center justify-center group-hover:border-tertiary transition-colors">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 0, 'wght' 200;">person</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Personal</span>
+</button>
+</div>
+</section>
+<!-- Repeat Options (Horizontal Scroll) -->
+<section class="flex flex-col gap-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest pl-xs">Repeat</span>
+<div class="flex gap-sm overflow-x-auto no-scrollbar pb-xs -mx-margin-mobile px-margin-mobile">
+<button class="shrink-0 bg-secondary/20 border border-secondary/50 rounded-full px-lg py-sm font-body-lg text-body-lg text-secondary whitespace-nowrap neon-bloom-secondary">Once</button>
+<button class="shrink-0 glass-panel rounded-full px-lg py-sm font-body-lg text-body-lg text-on-surface-variant whitespace-nowrap hover:text-on-surface transition-colors">Daily</button>
+<button class="shrink-0 glass-panel rounded-full px-lg py-sm font-body-lg text-body-lg text-on-surface-variant whitespace-nowrap hover:text-on-surface transition-colors">Weekly</button>
+<button class="shrink-0 glass-panel rounded-full px-lg py-sm font-body-lg text-body-lg text-on-surface-variant whitespace-nowrap hover:text-on-surface transition-colors">Monthly</button>
+<button class="shrink-0 glass-panel rounded-full px-lg py-sm font-body-lg text-body-lg text-on-surface-variant whitespace-nowrap hover:text-on-surface transition-colors">Custom...</button>
+</div>
+</section>
+<!-- Toggles & Attachments -->
+<section class="glass-panel rounded-xl p-md flex flex-col gap-lg">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 0, 'wght' 300;">notifications_active</span>
+<span class="font-body-lg text-body-lg text-on-surface">Sound Alert</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-all duration-300 top-0 left-0 checked:left-6 checked:border-primary focus:outline-none" id="sound-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="sound-toggle"></label>
+</div>
+</div>
+<div class="w-full h-[1px] bg-white/5"></div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 0, 'wght' 300;">vibration</span>
+<span class="font-body-lg text-body-lg text-on-surface">Vibration</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-surface border-4 border-surface-variant appearance-none cursor-pointer z-10 transition-all duration-300 top-0 left-0 focus:outline-none" id="vib-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="vib-toggle"></label>
+</div>
+</div>
+<div class="w-full h-[1px] bg-white/5"></div>
+<button class="flex items-center gap-sm text-on-surface-variant hover:text-primary transition-colors w-full text-left">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">attach_file</span>
+<span class="font-body-lg text-body-lg flex-1">Add Note or Attachment</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0, 'wght' 300;">chevron_right</span>
+</button>
+</section>
+</main>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-0 left-0 right-0 p-margin-mobile bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent z-40 pb-safe pt-xl">
+<button class="w-full h-14 bg-primary rounded-xl font-title-md text-title-md text-on-primary flex items-center justify-center gap-sm neon-bloom-primary active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1, 'wght' 400;">add_task</span>
+            Create Reminder
+        </button>
+</div>
+</body></html>

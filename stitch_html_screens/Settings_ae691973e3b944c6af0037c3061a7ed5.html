@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>Nova Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#004395",
+                        "secondary-container": "#03b5d3",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#2c0051",
+                        "surface-bright": "#3a3939",
+                        "surface-dim": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#ddb7ff",
+                        "surface": "#131313",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#acedff",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#4d4354",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "surface-container": "#201f1f",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#001a42",
+                        "outline": "#988d9f",
+                        "error-container": "#93000a",
+                        "primary-container": "#b76dff",
+                        "on-secondary-container": "#00424e",
+                        "background": "#131313",
+                        "on-secondary-fixed": "#001f26",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed": "#f0dbff",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#4cd7f6",
+                        "primary-fixed-dim": "#ddb7ff",
+                        "primary": "#ddb7ff",
+                        "on-tertiary-container": "#00285d",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "on-surface-variant": "#cfc2d6",
+                        "tertiary-container": "#4d8eff",
+                        "on-primary-fixed-variant": "#6900b3",
+                        "on-secondary": "#003640",
+                        "on-primary-container": "#400071",
+                        "inverse-primary": "#842bd2",
+                        "on-primary": "#490080",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-error": "#690005",
+                        "on-tertiary": "#002e6a",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary": "#adc6ff",
+                        "tertiary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter-mobile": "16px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505; /* Base Z-Index 1 Deep Black */
+            color: theme('colors.on-background');
+        }
+        
+        .glass-card {
+            background-color: rgba(18, 18, 18, 0.4); /* Z-Index 2 Cards */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05); /* glass_stroke */
+        }
+        
+        .glass-card-active {
+            background-color: rgba(18, 18, 18, 0.6); /* Z-Index 3 Active Glass */
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Inner glow */
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .neon-bloom-primary {
+            box-shadow: 0 0 20px 0 rgba(221, 183, 255, 0.3); /* primary color at 30% */
+        }
+        
+        .neon-bloom-secondary {
+            box-shadow: 0 0 20px 0 rgba(76, 215, 246, 0.3); /* secondary color at 30% */
+        }
+        
+        .icon-glow-primary {
+            text-shadow: 0 0 8px rgba(221, 183, 255, 0.6);
+        }
+        
+        .icon-glow-secondary {
+            text-shadow: 0 0 8px rgba(76, 215, 246, 0.6);
+        }
+        
+        .icon-glow-error {
+            text-shadow: 0 0 8px rgba(255, 180, 171, 0.6);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: theme('colors.surface-container-highest');
+            transition: .4s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 2px;
+            background-color: theme('colors.on-surface');
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: theme('colors.primary');
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+            background-color: theme('colors.surface');
+        }
+
+        .slider.round {
+            border-radius: 24px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /* Hide scrollbar for clean minimal look */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col pt-16 pb-20 overflow-x-hidden">
+<!-- Ambient Background Glows -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] transform translate-x-1/3 -translate-y-1/3"></div>
+<div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] transform -translate-x-1/3 translate-y-1/3"></div>
+</div>
+<!-- TopAppBar Shared Component (Desktop Only) -->
+<header class="hidden md:flex fixed top-0 w-full z-50 justify-between items-center px-margin-mobile h-16 border-b border-white/5 bg-background/60 dark:bg-background/60 backdrop-blur-xl shadow-none">
+<div class="flex items-center gap-md">
+<h1 class="font-headline-lg text-headline-lg font-bold tracking-tight text-primary">Nova</h1>
+</div>
+<div class="flex items-center gap-md">
+<!-- Nav Items -->
+<nav class="flex gap-lg">
+<a class="font-title-md text-title-md text-on-surface-variant hover:opacity-80 transition-opacity flex items-center gap-base" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">home</span>
+</a>
+<a class="font-title-md text-title-md text-on-surface-variant hover:opacity-80 transition-opacity flex items-center gap-base" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">calendar_month</span>
+</a>
+<a class="font-title-md text-title-md text-on-surface-variant hover:opacity-80 transition-opacity flex items-center gap-base" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">timer</span>
+</a>
+<a class="font-title-md text-title-md text-on-surface-variant hover:opacity-80 transition-opacity flex items-center gap-base" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">analytics</span>
+</a>
+<a class="font-title-md text-title-md text-primary hover:opacity-80 transition-opacity flex items-center gap-base relative after:content-[''] after:absolute after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full after:shadow-[0_0_8px_#ddb7ff]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1, 'wght' 300;">settings</span>
+</a>
+</nav>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-white/10 ml-lg">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A close up portrait of a person set against a dark void background. The lighting is dramatic and cinematic, featuring a soft blue neon rim light on one side and a gentle white key light on the face. The overall aesthetic is ethereal, modern, and aligned with a sleek, dark-mode design system. The mood is calm and contemplative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpOUnTXmAlz4Cs9AvObsvOSYqvYh7J1xE2R19EOr9YIzpz_ktpRHQcCra_9eXMj-p2_mj13RzpHne1Vfi_vCFlGCJimQnctyWlRbgxFP7sVdmfyjCzds6LKkMvVcKa7Llpiyx4Nlnfs7Aj8EnJs_h8IAZnTxcu2McMdllSIqKr6d8Ex5cwS8IOIKWWkT25ld3DEZyEVxJFT5WLFvW2cWlq0VYXDOOJph6IhyUSgqGuPvPzn1W23waSB0zTUTOFXD4pg6raq_Kr-78"/>
+</div>
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Mobile Header (Suppressed Nav, Focus on Settings) -->
+<header class="md:hidden fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-background/60 backdrop-blur-xl border-b border-white/5">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight text-primary">Settings</h1>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-2xl mx-auto px-margin-mobile flex flex-col gap-sm relative z-10 mt-8">
+<!-- Profile Card (Bento Style) -->
+<section class="glass-card rounded-xl p-md mb-md flex items-center gap-md hover:bg-surface-container-high/40 transition-colors cursor-pointer group">
+<div class="w-16 h-16 rounded-full overflow-hidden border border-white/10 relative">
+<img alt="User Avatar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stylized digital portrait of a user set against a deep, infinite black background. Subtle ethereal neon glows, primarily cyan and soft purple, illuminate the edges of the figure, creating a glassmorphic and futuristic vibe. The composition is highly refined with generous negative space. The image evokes a sense of high-end, calm, late-night productivity typical of modern dark-mode interfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU_La5-CyP4_MAIM59L7EOcFqquIw-_y4QnqwVtsYzTG-5o7gcs0iKmG8E51hvj59XKj-hdyO2bK892AWCy2TKdwCJf_jIjvlN-9bweaQrglV0PJeQg7JB16detFcD44i7UYANNnAy_Ez7JP-HoJRBWqJgfuDzDmDSFoFTD5THICr7hVt3zvp4twQhYgw-AhydeuYoNBWw_a7mRnRnd_y54uJQKUYnykRI8kJ1Ba4SZCG74S_RuP53nx7tE5Rv9EcaSPfJHrlrsk0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+</div>
+<div class="flex-1">
+<h2 class="font-title-md text-title-md text-on-surface mb-xs">Elara Vance</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant/60">Pro Account</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary transition-colors" style="font-variation-settings: 'wght' 200;">chevron_right</span>
+</section>
+<!-- Preferences Group -->
+<div class="font-label-sm text-label-sm text-on-surface-variant/40 uppercase tracking-widest pl-xs mb-xs mt-md">Preferences</div>
+<section class="glass-card rounded-xl flex flex-col overflow-hidden">
+<!-- Notifications -->
+<button class="w-full flex items-center justify-between p-md border-b border-white/5 hover:bg-surface-container-high/30 transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary icon-glow-secondary group-hover:scale-110 transition-transform" style="font-variation-settings: 'wght' 300;">notifications_active</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Notifications</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-secondary transition-colors" style="font-variation-settings: 'wght' 200;">chevron_right</span>
+</button>
+<!-- Theme & Colors -->
+<button class="w-full flex items-center justify-between p-md border-b border-white/5 hover:bg-surface-container-high/30 transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary icon-glow-primary group-hover:scale-110 transition-transform" style="font-variation-settings: 'wght' 300;">palette</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Theme &amp; Colors</span>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex -space-x-2">
+<div class="w-4 h-4 rounded-full bg-primary border border-surface"></div>
+<div class="w-4 h-4 rounded-full bg-secondary border border-surface"></div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary transition-colors" style="font-variation-settings: 'wght' 200;">chevron_right</span>
+</div>
+</button>
+<!-- Dark Mode Toggle -->
+<div class="w-full flex items-center justify-between p-md border-b border-white/5 hover:bg-surface-container-high/30 transition-colors">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface" style="font-variation-settings: 'wght' 300;">dark_mode</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Dark Mode</span>
+</div>
+<label class="switch">
+<input checked="" type="checkbox"/>
+<span class="slider round"></span>
+</label>
+</div>
+<!-- Sound & Alerts -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-container-high/30 transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface group-hover:scale-110 transition-transform" style="font-variation-settings: 'wght' 300;">volume_up</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Sound &amp; Alerts</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-on-surface transition-colors" style="font-variation-settings: 'wght' 200;">chevron_right</span>
+</button>
+</section>
+<!-- System Group -->
+<div class="font-label-sm text-label-sm text-on-surface-variant/40 uppercase tracking-widest pl-xs mb-xs mt-md">System</div>
+<section class="glass-card rounded-xl flex flex-col overflow-hidden mb-lg">
+<!-- Backup -->
+<button class="w-full flex items-center justify-between p-md border-b border-white/5 hover:bg-surface-container-high/30 transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface group-hover:scale-110 transition-transform" style="font-variation-settings: 'wght' 300;">cloud_sync</span>
+</div>
+<div class="flex flex-col items-start">
+<span class="font-body-lg text-body-lg text-on-surface">Backup</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant/60">Last synced 2h ago</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-on-surface transition-colors" style="font-variation-settings: 'wght' 200;">chevron_right</span>
+</button>
+<!-- Font Size -->
+<button class="w-full flex items-center justify-between p-md border-b border-white/5 hover:bg-surface-container-high/30 transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface group-hover:scale-110 transition-transform" style="font-variation-settings: 'wght' 300;">text_fields</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Font Size</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant/60">Default</span>
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-on-surface transition-colors" style="font-variation-settings: 'wght' 200;">chevron_right</span>
+</div>
+</button>
+<!-- About -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-container-high/30 transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface group-hover:scale-110 transition-transform" style="font-variation-settings: 'wght' 300;">info</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">About Nova Reminder</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant/40">v2.4.1</span>
+</button>
+</section>
+<!-- Destructive Action -->
+<button class="glass-card rounded-xl p-md flex items-center justify-center gap-sm hover:bg-error/10 transition-colors border border-error/20 group">
+<span class="material-symbols-outlined text-error icon-glow-error" style="font-variation-settings: 'wght' 300;">logout</span>
+<span class="font-title-md text-title-md text-error">Sign Out</span>
+</button>
+</main>
+<!-- BottomNavBar Shared Component (Mobile Only) -->
+<!-- Note: Settings is technically a destination in the JSON, so we render the nav and highlight Settings -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 rounded-t-xl border-t border-white/10 bg-surface/60 dark:bg-surface/60 backdrop-blur-2xl shadow-[0_-8px_24px_rgba(0,0,0,0.5)] flex justify-around items-center h-20 px-gutter-mobile pb-safe">
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-primary/80 transition-colors active:scale-90 w-16 group">
+<span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform" style="font-variation-settings: 'wght' 300;">home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-primary/80 transition-colors active:scale-90 w-16 group">
+<span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform" style="font-variation-settings: 'wght' 300;">calendar_month</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-primary/80 transition-colors active:scale-90 w-16 group">
+<span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform" style="font-variation-settings: 'wght' 300;">timer</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-primary/80 transition-colors active:scale-90 w-16 group">
+<span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform" style="font-variation-settings: 'wght' 300;">analytics</span>
+</button>
+<button class="flex flex-col items-center justify-center relative text-primary after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-primary after:rounded-full after:shadow-[0_0_8px_#ddb7ff] active:scale-90 transition-transform w-16">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1, 'wght' 300;">settings</span>
+</button>
+</nav>
+<script>
+        // Simple interactions for visual feedback
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.98)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = '';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+    </script>
+</body></html>

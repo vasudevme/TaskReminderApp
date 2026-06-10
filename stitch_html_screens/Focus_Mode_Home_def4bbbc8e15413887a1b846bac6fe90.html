@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nova Focus Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#004395",
+                        "secondary-container": "#03b5d3",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#2c0051",
+                        "surface-bright": "#3a3939",
+                        "surface-dim": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#ddb7ff",
+                        "surface": "#131313",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#acedff",
+                        "surface-container-low": "#1c1b1b",
+                        "outline-variant": "#4d4354",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "surface-container": "#201f1f",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#001a42",
+                        "outline": "#988d9f",
+                        "error-container": "#93000a",
+                        "primary-container": "#b76dff",
+                        "on-secondary-container": "#00424e",
+                        "background": "#131313",
+                        "on-secondary-fixed": "#001f26",
+                        "on-background": "#e5e2e1",
+                        "primary-fixed": "#f0dbff",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#4cd7f6",
+                        "primary-fixed-dim": "#ddb7ff",
+                        "primary": "#ddb7ff",
+                        "on-tertiary-container": "#00285d",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "on-surface-variant": "#cfc2d6",
+                        "tertiary-container": "#4d8eff",
+                        "on-primary-fixed-variant": "#6900b3",
+                        "on-secondary": "#003640",
+                        "on-primary-container": "#400071",
+                        "inverse-primary": "#842bd2",
+                        "on-primary": "#490080",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-error": "#690005",
+                        "on-tertiary": "#002e6a",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary": "#adc6ff",
+                        "tertiary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter-mobile": "16px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505; /* Z-Index 1 base */
+            color: #e5e2e1;
+            overflow: hidden; /* Prevent scrolling in focus mode */
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 24px rgba(221, 183, 255, 0.4);
+        }
+
+        .neon-bloom {
+            box-shadow: 0 0 40px rgba(221, 183, 255, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+        }
+
+        /* Subtle animated grain overlay */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            animation: noiseShift 8s steps(10) infinite;
+        }
+
+        @keyframes noiseShift {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -5%); }
+            20% { transform: translate(-10%, 5%); }
+            30% { transform: translate(5%, -10%); }
+            40% { transform: translate(-5%, 15%); }
+            50% { transform: translate(-10%, 5%); }
+            60% { transform: translate(15%, 0); }
+            70% { transform: translate(0, 15%); }
+            80% { transform: translate(3%, 35%); }
+            90% { transform: translate(-10%, 10%); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Pulse animation for timer */
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 24px rgba(221, 183, 255, 0.3); }
+            50% { transform: scale(1.02); text-shadow: 0 0 40px rgba(221, 183, 255, 0.6); }
+        }
+        .timer-pulse {
+            animation: subtlePulse 4s ease-in-out infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col items-center justify-center relative">
+<div class="grain-overlay"></div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 w-full max-w-md mx-auto flex flex-col items-center justify-between h-[884px] px-margin-mobile py-xl">
+<!-- Top Spacer -->
+<div class="w-full flex justify-center opacity-50">
+<span class="material-symbols-outlined text-outline" data-icon="trip_origin">trip_origin</span>
+</div>
+<!-- Central Timer -->
+<div class="flex flex-col items-center justify-center flex-grow w-full relative">
+<!-- Decorative concentric circles -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+<div class="w-64 h-64 rounded-full border border-primary/20"></div>
+<div class="absolute w-80 h-80 rounded-full border border-primary/10"></div>
+</div>
+<!-- Timer Value -->
+<div class="text-[120px] leading-none font-display-lg text-primary glow-text timer-pulse select-none tracking-tighter" id="focus-timer">
+                25:00
+            </div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-[0.2em] mt-md opacity-60">
+                Deep Focus Session
+            </div>
+</div>
+<!-- Bottom Section: Dimmed Reminders & Exit Action -->
+<div class="w-full flex flex-col items-center gap-lg">
+<!-- Urgent Reminders (Dimmed) -->
+<div class="w-full flex flex-col gap-base opacity-40 hover:opacity-100 transition-opacity duration-500">
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-xs px-xs">Upcoming</div>
+<div class="glass-card rounded-lg p-md flex items-center justify-between group">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="font-body-lg text-body-lg text-on-surface">Client Presentation Prep</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">14:00</span>
+</div>
+</div>
+<!-- Exit Action -->
+<button class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors py-md px-xl flex items-center gap-sm group" onclick="exitFocus()">
+<span class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform" data-icon="close">close</span>
+                Exit Focus
+            </button>
+</div>
+</main>
+<script>
+        // Simple timer logic for demonstration
+        function exitFocus() {
+            // Visual feedback before action
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                console.log("Exiting focus mode...");
+                // In a real app, this would navigate away or close the modal
+            }, 500);
+        }
+    </script>
+</body></html>
